@@ -43,8 +43,8 @@ dependencies {
     // Iron's Spells: компилируем против полного мода (класс Scroll не входит в :api)
     compileOnly "io.redspace:irons_spellbooks:${irons_spells_version}"
     compileOnly "io.redspace:irons_lib:${irons_lib_version}"
-    localRuntime "io.redspace:irons_lib:${irons_lib_version}"
-    localRuntime "io.redspace:irons_spellbooks:${irons_spells_version}"
+    runtimeOnly "io.redspace:irons_lib:${irons_lib_version}"
+    runtimeOnly "io.redspace:irons_spellbooks:${irons_spells_version}"
 
     // Curios
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"

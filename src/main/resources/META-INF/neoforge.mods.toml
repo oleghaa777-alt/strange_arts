@@ -25,7 +25,7 @@ side="BOTH"
 [[dependencies.${mod_id}]]
 modId="irons_spellbooks"
 type="required"
-versionRange="[3.16,)"
+versionRange="[1.21.1,)"
 ordering="AFTER"
 side="BOTH"
 

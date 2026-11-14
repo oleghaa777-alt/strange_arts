@@ -1,0 +1,67 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.78'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    mavenLocal()
+    maven { name = "Iron's Maven"; url = "https://code.redspace.io/releases" }
+    maven { name = "Curios"; url = "https://maven.theillusivec4.top/" }
+}
+
+neoForge {
+    version = neo_version
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    // Iron's Spells: компилируем против полного мода (класс Scroll не входит в :api)
+    compileOnly "io.redspace:irons_spellbooks:${irons_spells_version}"
+    compileOnly "io.redspace:irons_lib:${irons_lib_version}"
+    localRuntime "io.redspace:irons_lib:${irons_lib_version}"
+    localRuntime "io.redspace:irons_spellbooks:${irons_spells_version}"
+
+    // Curios
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+}
+
+// подстановка переменных в neoforge.mods.toml
+tasks.withType(ProcessResources).configureEach {
+    var props = [
+        minecraft_version: minecraft_version,
+        neo_version      : neo_version,
+        mod_id           : mod_id,
+        mod_name         : mod_name,
+        mod_version      : mod_version
+    ]
+    inputs.properties props
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand props
+    }
+}

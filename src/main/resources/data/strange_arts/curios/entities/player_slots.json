@@ -1,0 +1,9 @@
+{
+  "entities": [
+    "player"
+  ],
+  "slots": [
+    "strange_arts:eye_of_agamotto",
+    "strange_arts:cloak_of_levitation"
+  ]
+}

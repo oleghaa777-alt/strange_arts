@@ -16,9 +16,8 @@
   "death.attack.mystic_magic": "%1$s was killed by mystic magic",
   "death.attack.mystic_magic.player": "%1$s was killed by mystic magic from %2$s",
   "spell.strange_arts.mystic_shield": "Mystic Shield",
-  "spell.strange_arts.mystic_shield.guide": "Surrounds you with a ring of mystic energy that absorbs damage.",
-  "spell.strange_arts.mystic_whip": "Mystic Whip",
-  "spell.strange_arts.mystic_whip.guide": "Lashes out with a whip of sparks in the direction you look and pulls the target toward you.",
+  "spell.strange_arts.mystic_shield.guide": "Conjures a mystic shield in front of you that absorbs damage and blocks projectiles.",
   "tooltip.strange_arts.eye_of_agamotto": "Mystic spell power x%s while worn",
-  "tooltip.strange_arts.thunder_axe": "Lightning spell damage +%s while held"
+  "tooltip.strange_arts.thunder_axe": "Lightning spell damage +%s while held",
+  "entity.strange_arts.mystic_shield": "Mystic Shield"
 }

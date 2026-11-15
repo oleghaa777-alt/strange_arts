@@ -1,6 +1,7 @@
 package com.example.strangearts.magic.spells;
 
 import com.example.strangearts.StrangeArts;
+import com.example.strangearts.entity.MysticShieldEntity;
 import com.example.strangearts.magic.StrangeSchools;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -9,13 +10,12 @@ import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.api.spells.CastType;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Щит Мистика (v1): даёт поглощение (жёлтые сердца) и рисует вокруг игрока кольцо искр.
- * Позже можно заменить на отдельную сущность-щит с кастомным рендером (как ShieldEntity у Iron's).
+ * Щит Мистика: ставит перед заклинателем щит Стрэнджа (сущность MysticShieldEntity) и даёт поглощение.
+ * Пока щит держится, он сбивает чужие снаряды; исчезает по времени или когда поглощение кончилось.
  */
 public class MysticShieldSpell extends AbstractSpell {
     private final ResourceLocation spellId = StrangeArts.id("mystic_shield");
@@ -76,19 +76,14 @@ public class MysticShieldSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        float hp = getShieldHP(spellLevel, entity);
-        entity.setAbsorptionAmount(Math.max(entity.getAbsorptionAmount(), hp));
-
-        if (level instanceof ServerLevel serverLevel) {
-            // кольцо искр на уровне груди, радиус ~1.2
-            for (int i = 0; i < 36; i++) {
-                double a = i / 36.0 * Math.PI * 2;
-                serverLevel.sendParticles(ParticleTypes.FLAME,
-                        entity.getX() + Math.cos(a) * 1.2,
-                        entity.getY() + 1.0 + Math.sin(i * 0.7) * 0.15,
-                        entity.getZ() + Math.sin(a) * 1.2,
-                        1, 0, 0, 0, 0.01);
+        if (!level.isClientSide) {
+            // старый щит этого же заклинателя убираем, чтобы не копились
+            for (MysticShieldEntity old : level.getEntitiesOfClass(MysticShieldEntity.class,
+                    entity.getBoundingBox().inflate(4), shield -> shield.isOwnedBy(entity))) {
+                old.discard();
             }
+            entity.setAbsorptionAmount(Math.max(entity.getAbsorptionAmount(), getShieldHP(spellLevel, entity)));
+            level.addFreshEntity(new MysticShieldEntity(level, entity));
         }
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }

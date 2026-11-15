@@ -6,6 +6,7 @@ license="MIT"
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
+credits="3D-модель щита: Shield Stranger, автор Elite Big Speakerman (CC-BY-4.0). 3D-модель секиры: Stormbreaker, автор Fred Drabble (CC-BY-4.0)."
 description='''Магия мистических искусств: школа Стрэнджа для Iron's Spells, слоты Глаза Агамотто и Плаща Левитации.'''
 
 [[dependencies.${mod_id}]]

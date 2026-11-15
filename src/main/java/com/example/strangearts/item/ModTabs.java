@@ -26,13 +26,11 @@ public class ModTabs {
                 output.accept(ModItems.THUNDER_AXE.get());
 
                 // по одному свитку на каждый уровень каждого мистического заклинания
-                List<AbstractSpell> spells = List.of(
-                        StrangeSpells.MYSTIC_SHIELD.get(),
-                        StrangeSpells.MYSTIC_WHIP.get());
+                List<AbstractSpell> spells = List.of(StrangeSpells.MYSTIC_SHIELD.get());
                 for (AbstractSpell spell : spells) {
                     for (int level = spell.getMinLevel(); level <= spell.getMaxLevel(); level++) {
                         ItemStack scroll = new ItemStack(ModItems.MYSTIC_SCROLL.get());
-                        // как в вкладке свитков Iron's: метод записывает заклинание прямо в предмет
+                        // как во вкладке свитков Iron's: метод записывает заклинание прямо в предмет
                         ISpellContainer.createScrollContainer(spell, level, scroll);
                         output.accept(scroll);
                     }

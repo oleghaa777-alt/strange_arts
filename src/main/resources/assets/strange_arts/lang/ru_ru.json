@@ -16,9 +16,8 @@
   "death.attack.mystic_magic": "%1$s пал от мистической магии",
   "death.attack.mystic_magic.player": "%1$s пал от мистической магии, которую применил %2$s",
   "spell.strange_arts.mystic_shield": "Мистический щит",
-  "spell.strange_arts.mystic_shield.guide": "Окружает вас кольцом мистической энергии, которое поглощает урон.",
-  "spell.strange_arts.mystic_whip": "Мистический хлыст",
-  "spell.strange_arts.mystic_whip.guide": "Бьёт хлыстом из искр по цели в направлении взгляда и подтягивает её к вам.",
+  "spell.strange_arts.mystic_shield.guide": "Создаёт перед вами щит Стрэнджа: он поглощает урон и сбивает летящие снаряды.",
   "tooltip.strange_arts.eye_of_agamotto": "Сила мистической магии ×%s, пока надет",
-  "tooltip.strange_arts.thunder_axe": "Урон электрических заклинаний +%s, пока в руке"
+  "tooltip.strange_arts.thunder_axe": "Урон электрических заклинаний +%s, пока в руке",
+  "entity.strange_arts.mystic_shield": "Мистический щит"
 }

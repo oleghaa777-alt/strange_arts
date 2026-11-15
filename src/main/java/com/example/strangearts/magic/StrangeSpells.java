@@ -1,7 +1,6 @@
 package com.example.strangearts.magic;
 
 import com.example.strangearts.magic.spells.MysticShieldSpell;
-import com.example.strangearts.magic.spells.MysticWhipSpell;
 import com.example.strangearts.StrangeArts;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -15,5 +14,4 @@ public class StrangeSpells {
             DeferredRegister.create(SpellRegistry.SPELL_REGISTRY_KEY, StrangeArts.MOD_ID);
 
     public static final Supplier<AbstractSpell> MYSTIC_SHIELD = SPELLS.register("mystic_shield", MysticShieldSpell::new);
-    public static final Supplier<AbstractSpell> MYSTIC_WHIP = SPELLS.register("mystic_whip", MysticWhipSpell::new);
 }
